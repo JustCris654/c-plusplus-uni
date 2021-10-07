@@ -19,10 +19,10 @@ int main() {
 	std::cin >> hours;
 
 	std::cout << "Insert how many minutes be left from midnight: ";
-	std::cin >> minutes;	
-	
+	std::cin >> minutes;
+
 	std::cout << "Insert how many seconds be left from midnight: ";
 	std::cin >> seconds;
 
-	std::cout << "Seconds to midnight: " << processSecondsToMidnight(seconds, minutes, hours) << "\n";	
+	std::cout << "Seconds to midnight: " << processSecondsToMidnight(seconds, minutes, hours) << "\n";
 }
