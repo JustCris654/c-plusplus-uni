@@ -5,6 +5,7 @@ using namespace std;
 double pow(double base,double exp);
 double pow_pos(double base,double exp);
 
+double  fxp(double b, int e);
 int main(){
 	
 	double base, exponent;
@@ -31,4 +32,11 @@ double pow(double base, double exp){
 double pow_pos(double base, double exp){
 	if(exp == 0) return 1;
 	return base * pow_pos(base, exp - 1);
+}
+double fxp(double b,int e){
+	if(e==0)return 1;
+	double tmp=fxp(b,e/2);
+	tmp*=tmp;
+	if(e%2)tmp*=b;
+	return tmp;
 }
