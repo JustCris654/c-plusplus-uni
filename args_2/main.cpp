@@ -18,6 +18,6 @@ int main(int argc, char *argv[]){
             cout << line << "\n";
         }
     }
-
+    file.close();
     return 0;
 }
