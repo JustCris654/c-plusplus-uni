@@ -1,5 +1,10 @@
-#include <std/stdc++.h>
+#include <iostream>
+#include "file.h"
 
-int main(){
+using namespace std;
 
+int main(int argc, char *argv[]) {
+
+
+    return 0;
 }

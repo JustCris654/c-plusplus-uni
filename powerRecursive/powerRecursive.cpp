@@ -7,9 +7,9 @@ double pow_pos(double base,double exp);
 
 double  fxp(double b, int e);
 int main(){
-	
+
 	double base, exponent;
-	
+
 	// input base
 	cout << "Insert the base of the power: ";
 	cin >> base;
