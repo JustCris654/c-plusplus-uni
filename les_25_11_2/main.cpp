@@ -25,10 +25,11 @@ int main(int argc, char *argv[]) {
 
     int num = 0;
     while(top(num) != false){
-        top(num);
         out << num << '\n';
         pop();
     }
+    out.close();
+    file.close();
 
     return 0;
 }
