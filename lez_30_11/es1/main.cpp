@@ -4,9 +4,16 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
+
+    if(argc != 2){
+        cout << "Usage: program_name [input_file]" << '\n';
+        exit(1);
+    }
+
+    char *file_path = argv[1];
+
     ifstream in_file;
     ofstream out_file;
-    char file_path[] = "./input";
     in_file.open(file_path, ios::in);
     out_file.open(file_path, ios::app);
 
