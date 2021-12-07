@@ -5,6 +5,7 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 
+    cout << argv[1];
     if(argc != 2){
         cout << "Usage: program_name [input_file]" << '\n';
         exit(1);
