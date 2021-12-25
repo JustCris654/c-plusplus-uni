@@ -18,7 +18,10 @@ int calcola_ric(int x, int y) {
 
 int main(int argc, char *argv[]) {
 
-    cout << calcola_ric(10, 2) << '\n';
+    int a = 4622476, b = 21;
+
+    cout << calcola_ric(a, b) << '\n';
+    cout << calcola_it(a, b) << '\n';
 
     return 0;
 }
