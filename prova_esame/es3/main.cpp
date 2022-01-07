@@ -1,43 +1,1 @@
-#include <iostream>
-#include <fstream>
-#include <assert.h>
-
-using namespace std;
-
-bool is_email(char *text){
-    cout << " * Checking: " << text << '\n';
-    bool at_found = false;
-    bool dot_found = false;
-    for (int i = 0; text[i] != '\0'; ++i){
-        if (text[i] == '@') {
-            if (i == 0) return false;
-            else if (i > 0 && at_found) return false;
-            at_found = true;
-        }
-        else if (text[i] == '.' && at_found) {
-            if (i > 0 && dot_found && text[i-1] == '.') return false;
-            dot_found = true;
-        }
-    }
-    return at_found && dot_found;
-}
-
-int main(int argc, char *argv[]) {
-    ifstream file;
-    assert(argc > 1 && "Provide file input as argument.");
-    file.open(argv[1], ios::in);
-
-    if (file.is_open()){
-        char text[100];
-        int counter = 0;
-        while (file >> text){
-            is_email(text) && ++counter;
-        }
-
-        cout << "Numero stringhe compatibili trovate: " << counter << '\n';
-    } else {
-        cout << "Could not open file!";
-    }
-
-    return 0;
-}
+#include <iostream>#include "stack.h"using namespace std;/** * Ricordare che il file "pila.h" contiene la definizione della struct "cella" (qui sotto riportata) * * struct cella { *   int indiceRiga; *   int indiceColonna; * }; */void risolviLabirinto(int [][5], int, int);int main(int argc, char* argv[]) {    // Se modificate la funzione "main", ricordarsi poi di ripristinare il codice originale    //    // E' possibile modificare la matrice per effettuare dei test    int labirinto[5][5] = {        { 1, 0, 1, 1, 0 },        { 1, 1, 1, 0, 1 },        { 0, 1, 0, 1, 1 },        { 1, 1, 1, 1, 1 },        { 1, 1, 1, 1, 1 }    };    // E' possibile modificare la cella di arrivo per effettuare dei test (la cella di partenza invece è sempre [0,0])    cout<<"Percorso: ";    risolviLabirinto(labirinto, 4, 2);    return 0;}bool check_cell(int cell) {    if (cell == 1) return true;    else return false;}/* in the stack: * 0 -> up * 1 -> right * 2 -> down * 3 -> left */void dfs(int (*lab)[5],int x, int y, int end_x, int end_y, stack s, bool (*adj_l)[5][5]) {    if (x == end_x && y == end_y) {        pos p_cur = {x, y};        push(p_cur, s);        print(s);        return;    }    if (adj_l[x][y][0]) {        pos p_cur = {x, y};        push(p_cur, s);        if (adj_l[x][y][1]) {            adj_l[x][y][1] = false;            adj_l[x-1][y][3] = false;            dfs(lab, x-1, y, end_x, end_y, s, adj_l);            adj_l[x][y][0] = false;        }        if (adj_l[x][y][2]) {            adj_l[x][y][2] = false;            adj_l[x][y+1][4] = false;            dfs(lab, x, y+1, end_x, end_y, s, adj_l);            adj_l[x][y][0] = false;        }        if (adj_l[x][y][3]) {            adj_l[x][y][3] = false;            adj_l[x+1][y][1] = false;            dfs(lab, x+1, y, end_x, end_y, s, adj_l);            adj_l[x][y][0] = false;        }        if (adj_l[x][y][4]) {            adj_l[x][y][4] = false;            adj_l[x][y-1][2] = false;            dfs(lab, x, y-1, end_x, end_y, s, adj_l);            adj_l[x][y][0] = false;        }    } else {        pop(s);    }}void risolviLabirinto(int (*lab)[5], int end_x,int end_y) {    cout << endl;    stack s = new node;    init(s);    bool adjacency_list[5][5][5] = { false };    for (int i = 0; i < 5; ++i) {        for (int j = 0; j < 5; ++j) {            if (lab[i][j] == 1) {                adjacency_list[i][j][0] = true;                if (i - 1 >= 0) { // up                    adjacency_list[i][j][1] = check_cell(lab[i - 1][j]);                }                if (j + 1 < 5) { // right                    adjacency_list[i][j][2] = check_cell(lab[i][j + 1]);                }                if (i + 1 < 5) { // down                    adjacency_list[i][j][3] = check_cell(lab[i + 1][j]);                }                if (j - 1 >= 0) { // left                    adjacency_list[i][j][4] = check_cell(lab[i][j - 1]);                }            }        }    }    dfs(lab, 0, 0, end_x, end_y, s, adjacency_list);}

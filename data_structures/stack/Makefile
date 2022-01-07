@@ -1,4 +1,4 @@
-CXX = c++
+CXX = g++
 CXXFLAGS = -std=c++17 -Wall
 
 OBJECTS = main.o stack.o
