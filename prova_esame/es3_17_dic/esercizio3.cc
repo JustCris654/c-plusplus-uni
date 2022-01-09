@@ -119,6 +119,7 @@ bool pop_el(lista &head, lista el) {
         cur = cur->nodoSuccessivo;
     }
 
+    // remove left node
     if (cur->nodoPrecedente->nodoPrecedente == nullptr) {
         delete cur->nodoPrecedente;
         cur->nodoPrecedente = nullptr;
@@ -131,6 +132,7 @@ bool pop_el(lista &head, lista el) {
         cur->nodoPrecedente = prev_node;
     }
 
+    // remove right node
     if (cur->nodoSuccessivo->nodoSuccessivo == nullptr) {
         delete cur->nodoSuccessivo;
         cur->nodoSuccessivo = nullptr;
